@@ -1,5 +1,5 @@
 const homePage = (req, res) => {
-    res.json({message: "home page"});
+    res.render('home');
 }
 
 module.exports = homePage;

@@ -12,11 +12,8 @@ const drawPage = async(req, res) => {
     const labelEncoderClasses = fs.readFileSync(path.join(__dirname, '..', 'LabelEncoder', 'classes.json'));
     const classes = JSON.parse(labelEncoderClasses);
     
-    //keras model
-    const model = await tf.loadLayersModel('file://tf_model/model.json');
-
     //socket.io connection
-    io.on('connection', (socket) => {
+    io.on('connection', async(socket) => {
         //avoid repeated connections
         connections.push(socket.id);
         if(connections[0] === socket.id){
@@ -24,6 +21,9 @@ const drawPage = async(req, res) => {
         }
         console.log(`id ${socket.id} connected`);
         
+        //keras model
+        const model = await tf.loadLayersModel('file://tf_model/model.json');
+
         socket.on('url-emitter', (data) => {
             let pixels = [];
             const buffer = Buffer.from(data.url, "base64");

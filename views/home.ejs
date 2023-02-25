@@ -1,15 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/home.css">
     <title>Home</title>
 </head>
 
 <body>
+    <div id="header">
+        <div id="left-links">
+            <a href="">
+                <h1 id="home-title">Home</h1>
+            </a>
+        </div>
+        <div id="right-links">
+            <a>
+                <h2 id="login-title">Login</h2>
+            </a>
+            <a href="/about">
+                <h2 id="about-title">Sobre</h2>
+            </a>
+        </div>
+    </div>
 
+    <div id="main-content">
+        <div id="main-description">
+            <p id="main-description-text"><span id="drawJS">drawJS</span><br><br>Este é um projeto desenvolvido em
+                nodeJS
+                onde as principais
+                dependências são
+                sequelize, express, socket.io e tensorflowjs. Em conjunto com o servidor, existe uma rede neural
+                convolucional capaz
+                de processar
+                e classificar esboços de imagens (340 possíveis classificações diferentes).<br><br>
+                Login é necessário para
+                que seja coletada pequenas informações sobre o usuário.<br><br>Informações sobre o servidor, rede
+                neural e base de dados usada para treinar a rede neural estão disponíveis na página
+                <a href="/about">sobre</a>.<br><br>Dica<br>Espaço: Reseta o esboço
+            </p>
+            <!-- <p id="main-description-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi, molestias
+                atque!
+                Consectetur ipsum esse nemo sed quam mollitia ea corporis repudiandae. Aliquid soluta corrupti
+                laudantium
+                rerum esse. Nisi, aliquam dicta!</p> -->
+        </div>
+
+        <div id="button">
+            <a href="/draw"><button id="btn-start">Iniciar</button></a>
+        </div>
+
+    </div>
+
+    <div id="footer">
+        <div id="footer-content">
+            <div id="left-footer-content">
+                <div class="social-media-container">
+                    <a id="footer-text" href="https://github.com/reidn3r" target="_blank">
+                        <i id="github-footer" class="fa-brands fa-github"></i>
+                    </a>
+                </div>
+                <div class="social-media-container">
+                    <a id="footer-text" href="https://instagram.com/reidn3r" target="_blank"><i id="instagram-footer"
+                            class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+            <div id="right-footer-content">
+                <p id="footer-text">made with <i id="heart-footer" class="fa-solid fa-heart"></i> by <a
+                        href="https://github.com/reidn3r" target="_blank">reidn3r</a> </p>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
