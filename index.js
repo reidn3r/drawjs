@@ -26,12 +26,4 @@ app.use(express.static(path.join(__dirname, 'public')));
 //routes
 app.use('/', require('./routes/router'));
 
-/*
-    1. Login
-    2. Principal
-    3. Sobre
-        - Fala sobre projeto
-        - Links para github/insta/linkedin
-*/
-
 server.listen(PORT, () => console.log(`running at: http://localhost:${PORT}`));

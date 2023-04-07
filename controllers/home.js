@@ -1,4 +1,4 @@
-const homePage = (req, res) => {
+const homePage = async(req, res) => {
     res.render('home');
 }
 

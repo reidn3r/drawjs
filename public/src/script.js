@@ -6,8 +6,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     canvas.width = context.canvas.clientWidth;
     canvas.height= context.canvas.clientHeight;
-    context.lineWidth = 7;
-    context.fillStyle = 'white';
+
+    //line width
+    context.lineWidth = 20;
+    // context.lineWidth = 10;
+    
+    //background color
+    context.fillStyle = 'black';
+
+    //stroke color
+    context.strokeStyle = "#fff";
+
     context.fillRect(0, 0, context.canvas.clientWidth, context.canvas.clientHeight);
     
     const cursor = {
@@ -27,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (e) => {
         if(e.keyCode == 32){
             context.clearRect(0, 0, canvas.width, canvas.height);
-            context.fillStyle = 'white';
+            context.fillStyle = 'black';
             context.fillRect(0, 0, context.canvas.clientWidth, context.canvas.clientHeight);
         }
     })
@@ -49,14 +58,14 @@ document.addEventListener('DOMContentLoaded', () => {
         cursor.moving = true;
     }
 
-    //draw line function called
+    //draw line function
     const cicle = () => {
         if(cursor.active && cursor.moving && cursor.prevPos){
             drawLine({ pos: cursor.pos, prevPos:cursor.prevPos});
             cursor.moving = false;
         }
         cursor.prevPos = { x: cursor.pos.x, y:cursor.pos.y };
-        setTimeout(cicle, 15);
+        setTimeout(cicle, 5);
     }
     cicle();
 
