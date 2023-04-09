@@ -8,14 +8,13 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.height= context.canvas.clientHeight;
 
     //line width
-    context.lineWidth = 20;
-    // context.lineWidth = 10;
+    context.lineWidth = 5;
     
     //background color
-    context.fillStyle = 'black';
+    context.fillStyle = 'white';
 
     //stroke color
-    context.strokeStyle = "#fff";
+    // context.strokeStyle = "#fff";
 
     context.fillRect(0, 0, context.canvas.clientWidth, context.canvas.clientHeight);
     
@@ -36,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (e) => {
         if(e.keyCode == 32){
             context.clearRect(0, 0, canvas.width, canvas.height);
-            context.fillStyle = 'black';
+            context.fillStyle = 'white';
             context.fillRect(0, 0, context.canvas.clientWidth, context.canvas.clientHeight);
         }
     })
@@ -65,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cursor.moving = false;
         }
         cursor.prevPos = { x: cursor.pos.x, y:cursor.pos.y };
-        setTimeout(cicle, 5);
+        setTimeout(cicle, 1);
     }
     cicle();
 
