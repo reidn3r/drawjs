@@ -1,6 +1,7 @@
 require('dotenv').config();
 const path = require('path');
 const morgan = require('morgan');
+const favicon = require('serve-favicon');
 const express = require('express');
 const app = express();
 
@@ -22,6 +23,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 //serve static files
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(favicon(path.join(__dirname, 'public', 'icon', 'pen.png')));
 
 //routes
 app.use('/', require('./routes/router'));

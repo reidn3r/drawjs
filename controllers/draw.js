@@ -5,7 +5,7 @@ const Jimp = require('jimp');
 const tf = require('@tensorflow/tfjs-node');
 const { tfmodePreprocess, RGB2GRAYSCALE } = require('../public/src/preprocessInput');
 
-//Constants:
+//env variable:
 const size = process.env.IMGSIZE;
 const convKernel = [[0,1,0],[1,1,1],[0,1,0]];
 
@@ -21,7 +21,6 @@ const drawPage = async(req, res) => {
     
     //socket.io connection
     io.on('connection', async(socket) => {
-
         //avoid repeated connections
         connections.push(socket.id);
         if(connections[0] === socket.id){

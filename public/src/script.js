@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cursor.moving = false;
         }
         cursor.prevPos = { x: cursor.pos.x, y:cursor.pos.y };
-        setTimeout(cicle, 1);
+        setTimeout(cicle, 10);
     }
     cicle();
 
