@@ -28,4 +28,8 @@ app.use(favicon(path.join(__dirname, 'public', 'icon', 'pen.png')));
 //routes
 app.use('/', require('./routes/router'));
 
-server.listen(PORT, () => console.log(`running at: http://localhost:${PORT}`));
+// server.listen(PORT, () => console.log(`running at: http://localhost:${PORT}`));
+const db = require('./models/index');
+db.sequelize.sync().then(() => {
+    server.listen(PORT, () => console.log(`running at: http://localhost:${PORT}`));
+})
