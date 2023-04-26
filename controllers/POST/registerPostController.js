@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 
 const { UsersInfo } = require('../../models');
 
-const registerApi = async(req, res) => {
+const registerPost = async(req, res) => {
     const { username, confirm_password, password } = req.body;
     //Missing username, password or confirm password fields
     if(!username || !confirm_password || !password) return res.status(401).json({message: "missing register data"});
@@ -24,7 +24,7 @@ const registerApi = async(req, res) => {
 
     if(!created) return res.status(401).json({message: "Username is already registered"});
 
-    res.json({message: `User: ${username} has been created`});
+    res.redirect('/login');
 }
 
-module.exports = registerApi;
+module.exports = registerPost;

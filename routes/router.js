@@ -2,15 +2,20 @@ const express = require('express');
 const router = express.Router();
 
 //jwt auth
-const verifyJWT = require('../controllers/auth/jwtController');
+const verifyJWT = require('../middleware/jwtController');
 
-router.get('/',require('../controllers/pages/home'));
-router.get('/draw', verifyJWT, require('../controllers/pages/draw'));
-router.get('/about', require('../controllers/pages/about'));
-router.get('/login', require('../controllers/pages/loginGet'));
-router.post('/login', require('../controllers/pages/loginPost'));
-router.get('/register', require('../controllers/pages/register'));
+//GET Method Routes
+router.get('/',require('../controllers/GET/homeController'));
+router.get('/draw', verifyJWT, require('../controllers/GET/drawController'));
+router.get('/about', require('../controllers/GET/aboutController'));
+router.get('/login', require('../controllers/GET/loginController'));
+router.get('/register', require('../controllers/GET/registerController'));
 
+//POST Method Routes
+router.post('/login', require('../controllers/POST/loginPostController'));
+router.post('/register', require('../controllers/POST/registerPostController'));
+
+//Default
 router.get('/*', (req, res) => {
     res.redirect('/');
 })
