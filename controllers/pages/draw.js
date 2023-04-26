@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const Jimp = require('jimp');
 const tf = require('@tensorflow/tfjs-node');
-const { tfmodePreprocess, RGB2GRAYSCALE } = require('../public/src/preprocessInput');
+const { tfmodePreprocess, RGB2GRAYSCALE } = require('../../public/src/preprocessInput');
 
 //env variable:
 const size = process.env.IMGSIZE;
@@ -12,7 +12,7 @@ const convKernel = [[0,1,0],[1,1,1],[0,1,0]];
 const drawPage = async(req, res) => {
     
     //LabelEncoder classes
-    const labelEncoderClasses = fs.readFileSync(path.join(__dirname, '..', 'LabelEncoder', process.env.CLASSES_PTBR));
+    const labelEncoderClasses = fs.readFileSync(path.join(__dirname, '..', '..', 'LabelEncoder', process.env.CLASSES_PTBR));
     const classes = JSON.parse(labelEncoderClasses);
     
     //socketio

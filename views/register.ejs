@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/register.css">
+    <title>Register</title>
+</head>
+
+<body>
+    <div id="header">
+        <div id="left-links">
+            <a href="/">
+                <h1 id="home-title">Home</h1>
+            </a>
+        </div>
+        <div id="right-links">
+            <a>
+                <h2 id="login-title">Login</h2>
+            </a>
+            <a href="/about">
+                <h2 id="about-title">Sobre</h2>
+            </a>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <div id="main-description">
+            <form action="/api/register" method="POST">
+                <div class="text-fields">
+                    <div class="username-field">
+                        <p id="text-label">Username</p><input type="text" name="username" id="user-login"
+                            placeholder="Username">
+                    </div>
+                    <div class="password-field">
+                        <p id="text-label">Password</p><input type="password" name="password" id="user-pw"
+                            placeholder="Password">
+                    </div>
+                    <div class="password-field">
+                        <p id="text-label">Confirm password</p><input type="password" name="confirm_password"
+                            id="user-pw" placeholder="Confirm Password">
+                    </div>
+                    <div class="login">
+                        <input type="submit" value="Register" id="login-button">
+                    </div>
+                </div>
+            </form>
+
+            <div class="register">
+                <a href="/login" target="_blank">
+                    <p id="register-label">Login Page</p>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="footer">
+        <div id="footer-content">
+            <div id="left-footer-content">
+                <div class="social-media-container">
+                    <a id="footer-text" href="https://github.com/reidn3r" target="_blank">
+                        <i id="github-footer" class="fa-brands fa-github"></i>
+                    </a>
+                </div>
+                <div class="social-media-container">
+                    <a id="footer-text" href="https://instagram.com/reidn3r" target="_blank"><i id="instagram-footer"
+                            class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+            <div id="right-footer-content">
+                <p id="footer-text">made with <i id="heart-footer" class="fa-solid fa-heart"></i> by <a
+                        href="https://github.com/reidn3r" target="_blank">reidn3r</a> </p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

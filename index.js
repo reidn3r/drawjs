@@ -2,8 +2,16 @@ require('dotenv').config();
 const path = require('path');
 const morgan = require('morgan');
 const favicon = require('serve-favicon');
+const cookieParser = require('cookie-parser');
 const express = require('express');
 const app = express();
+
+//cookie-parser
+app.use(cookieParser());
+
+//body-parser
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 //socket.io setup
 const http = require('http');
@@ -27,9 +35,14 @@ app.use(favicon(path.join(__dirname, 'public', 'icon', 'pen.png')));
 
 //routes
 app.use('/', require('./routes/router'));
+app.use('/api', require('./routes/api'));
 
-// server.listen(PORT, () => console.log(`running at: http://localhost:${PORT}`));
 const db = require('./models/index');
-db.sequelize.sync().then(() => {
+db.sequelize.authenticate()
+.then(() => {
     server.listen(PORT, () => console.log(`running at: http://localhost:${PORT}`));
-})
+    console.log("\nMySQL connection running at: PORT 33061");
+    })
+    .catch((err) => {
+        console.log(err);
+    })
