@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let label = document.querySelector(".header-label");
     let probability = document.querySelector(".header-probability");
     socket.on('output-data', (data) => {
-        label.innerHTML = data.output[1];
+        label.innerHTML = "Label: " + data.output[1];
         probability.innerHTML = "Probabilidade: " + data.output[0].toFixed(4);
     })
 })
