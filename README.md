@@ -11,25 +11,25 @@ Principais dependências utilizadas:
 - [Socket.io](https://socket.io/pt-br/docs/v4/)
 - [Sequelize](https://sequelize.org/api/v6/identifiers)
 - [Jimp](https://www.npmjs.com/package/jimp)
-- [TensorFlow](https://www.tensorflow.org/api_docs/python/tf)
 - [TensorFlow.js](https://js.tensorflow.org/api/latest/?hl=pt-br&_gl=1*1b1gojl*_ga*MTU1NDA3NzMwMy4xNjczMTAzODg3*_ga_W0YLR4190T*MTY4MjQzNDUyNS4yMy4wLjE2ODI0MzQ5OTUuMC4wLjA.)
+- [TensorFlow](https://www.tensorflow.org/api_docs/python/tf)
 - [Pandas](https://pandas.pydata.org/docs/reference/index.html)
 - [Numpy](https://numpy.org/doc/stable/reference/)
 - [OpenCV](https://docs.opencv.org/4.x/)
 
 ### Rotas
 - requisição GET em '/': 
-    * renderiza a página inicial
+    * Renderiza a página inicial
 - requisição GET em '/login': 
-    * renderiza a página de login
+    * Renderiza a página de login
 - requisição POST em '/login': 
-    * processa os dados de login. Se não houver erros, é redirecionado para /draw
+    * Processa os dados de login. Se não houver erros, é redirecionado para /draw
 - requisição GET em '/registro': 
-    * renderiza a página de registro
+    * Renderiza a página de registro
 - requisição POST em '/registro': 
-    * processa os dados de registro. Se não houver erros, é redirecionado para /login
+    * Processa os dados de registro. Se não houver erros, é redirecionado para /login
 - requisição GET em '/draw':
-    * Renderiza a página de esboços.
+    * Se logado, renderiza a página de esboços.
     * Funcionamento:
         * Usuário fornece dados de entrada
         * Um evento é emitido pelo cliente, contendo dados da imagem desenhada.
@@ -44,11 +44,17 @@ Principais dependências utilizadas:
             * Descrição: Descrição do desenho;
             * Probabilidade: Probabilidade de acerto da classificação da rede-neural.
 <hr>
+<<<<<<< HEAD
 
 <h1 align="center">
   <img alt="draw-js" title="draw-js" width=860 src="./public/src/to_readme/gif-drawjs.gif" />
 </h1>
 
+=======
+  <p align="center">
+  <img src=https://github.com/reidn3r/drawjs/blob/master/public/src/to_readme/gif-drawjs.gif alt="animated" />
+  </p>
+>>>>>>> d9cf478d477e3a204c2f5eec678f20e1dd3a638b
 ### Requisitos:
 Necessário ter Git e Node instalado  
 
