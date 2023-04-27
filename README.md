@@ -44,9 +44,9 @@ Principais dependências utilizadas:
             * Descrição: Descrição do desenho;
             * Probabilidade: Probabilidade de acerto da classificação da rede-neural.
 <hr>
-
-  ![](https://github.com/reidn3r/drawjs/blob/master/public/src/to_readme/gif-drawjs.gif)
-
+  <p align="center">
+  <img src=https://github.com/reidn3r/drawjs/blob/master/public/src/to_readme/gif-drawjs.gif alt="animated" />
+  </p>
 ### Requisitos:
 Necessário ter Git e Node instalado  
 
