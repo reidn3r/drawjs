@@ -37,6 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
             context.clearRect(0, 0, canvas.width, canvas.height);
             context.fillStyle = 'white';
             context.fillRect(0, 0, context.canvas.clientWidth, context.canvas.clientHeight);
+            label.innerHTML = "Label";
+            probability.innerHTML = "Probabilidade";
         }
     })
 
@@ -73,5 +75,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const dataUrl = canvas.toDataURL('image/png', 1).replace(/^data:image\/png;base64,/, "");
             socket.emit('url-emitter', {url: dataUrl});
         }, 500);
+    })
+
+    /*
+        - output refresh
+    */
+    let label = document.querySelector(".header-label");
+    let probability = document.querySelector(".header-probability");
+    socket.on('output-data', (data) => {
+        label.innerHTML = data.output[1];
+        probability.innerHTML = "Probabilidade: " + data.output[0].toFixed(4);
     })
 })

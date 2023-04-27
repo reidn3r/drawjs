@@ -13,6 +13,10 @@ const size = process.env.IMGSIZE;
 const convKernel = [[0,1,0],[1,1,1],[0,1,0]];
 
 const drawPage = async(req, res) => {
+    //global variables
+    let prob_output;
+    let label_output
+
     //payload
     const cookies = req.cookies.jwt;
     const payload = jwt.verify(cookies, process.env.SECRET);
@@ -50,7 +54,7 @@ const drawPage = async(req, res) => {
                 .convolute(convKernel)
                     //Dilation
 
-                .write('drawjs.png')
+                // .write('drawjs.png')
                 .scan(0, 0, img.bitmap.width, img.bitmap.height, (x, y, i) => {
                     let r = img.bitmap.data[i];
                     let g = img.bitmap.data[i + 1];
@@ -73,6 +77,10 @@ const drawPage = async(req, res) => {
                 console.log("probabilidade: ", prob);
                 console.log('\n');
 
+                //output data
+                socket.emit('output-data', {output: [prob, classes[output.arraySync([0])]]});
+                // socket.emit('output', {data: "abc"});
+                
                 //Save Sketch Data
                 const [sketchData, created] = await SketchInfo.findOrCreate({
                     where:{ id: Number(output.arraySync([0])) },
@@ -80,7 +88,6 @@ const drawPage = async(req, res) => {
                         label: classes[output.arraySync([0])],
                         createdAt: new Date(),
                         updatedAt: new Date(),
-    
                     }
                 });
 
@@ -98,11 +105,11 @@ const drawPage = async(req, res) => {
                 tf.dispose(output);
                 tf.dispose(prob);
                 pixels = [];
-
             })
         }) 
     })
-    res.render('drawIA');
+
+    res.render('drawIA', {});
 }
 
 module.exports = drawPage;
