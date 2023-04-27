@@ -17,7 +17,7 @@ const loginPOST = async(req, res) => {
     const match = await bcrypt.compare(password, foundUser.password);
     if(!match) return res.status(401).json({message: "wrong password"});
 
-    const token = jwt.sign({user_id: foundUser.id}, process.env.SECRET, { expiresIn: 30 });
+    const token = jwt.sign({user_id: foundUser.id}, process.env.SECRET, { expiresIn: 10 });
     console.log(token);
     
     res.cookie('jwt', token, {httpOnly: true, secure:false});

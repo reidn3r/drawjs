@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 //jwt auth
-const verifyJWT = require('../middleware/jwtController');
+const verifyJWT = require('../middleware/jwtMiddleware');
 
 //GET Method Routes
 router.get('/',require('../controllers/GET/homeController'));

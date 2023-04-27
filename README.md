@@ -46,7 +46,7 @@ Principais dependências utilizadas:
 <hr>
 
 <h1 align="center">
-  <img alt="draw-js" title="draw-js" width=860 src="./public/src/assets/to_readme/gif-drawjs.gif" />
+  <img alt="draw-js" title="draw-js" width=860 src="./public/src/to_readme/gif-drawjs.gif" />
 </h1>
 
 ### Requisitos:

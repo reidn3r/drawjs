@@ -35,7 +35,6 @@ app.use(favicon(path.join(__dirname, 'public', 'icon', 'pen.png')));
 
 //routes
 app.use('/', require('./routes/router'));
-app.use('/api', require('./routes/api'));
 
 const db = require('./models/index');
 db.sequelize.authenticate()

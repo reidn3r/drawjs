@@ -3,15 +3,14 @@ const jwt = require('jsonwebtoken');
 
 const verifyJWT = (req, res, next) => {
     const token = req.cookies.jwt;
-    if(!token) return res.status(401).json({message: "invalid token"});
+    // if(!token) return res.status(401).json({message: "invalid token"});
+    if(!token) return res.status(401).redirect('/login');
     try{
         jwt.verify(token, process.env.SECRET, (err, decodedToken) => {
             if(err){
-                console.log(`ERROR: ${err.message}`);
                 res.redirect('/login');
             }
             else{
-                console.log(decodedToken);
                 next();
             }
         });

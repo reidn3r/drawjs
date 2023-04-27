@@ -4,6 +4,13 @@
     box-sizing: border-box;
 }
 
+
+/* a tags */
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
 .header{
     position: absolute;
     top: 0;

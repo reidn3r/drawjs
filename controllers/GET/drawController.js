@@ -5,11 +5,18 @@ const Jimp = require('jimp');
 const tf = require('@tensorflow/tfjs-node');
 const { tfmodePreprocess, RGB2GRAYSCALE } = require('../../public/src/preprocessInput');
 
+const { SketchInfo, UserOutput } = require('../../models');
+const jwt = require('jsonwebtoken');
+
 //env variable:
 const size = process.env.IMGSIZE;
 const convKernel = [[0,1,0],[1,1,1],[0,1,0]];
 
 const drawPage = async(req, res) => {
+    //payload
+    const cookies = req.cookies.jwt;
+    const payload = jwt.verify(cookies, process.env.SECRET);
+    const { user_id } = payload;
     
     //LabelEncoder classes
     const labelEncoderClasses = fs.readFileSync(path.join(__dirname, '..', '..', 'LabelEncoder', process.env.CLASSES_PTBR));
@@ -34,7 +41,7 @@ const drawPage = async(req, res) => {
         socket.on('url-emitter', (data) => {
             let pixels = [];
             const buffer = Buffer.from(data.url, "base64");
-            Jimp.read(buffer, (err, img) => {
+            Jimp.read(buffer, async(err, img) => {
                 if(err) console.log(err);
                 img.resize(Number(size), Number(size))
                 .invert()
@@ -61,11 +68,31 @@ const drawPage = async(req, res) => {
                 let output = model.predict(tensor).argMax(1);
                 let prob = model.predict(tensor).arraySync()[0][output.arraySync([0])];
                 
-                prob < 0.1 ? console.log("indefinido") : console.log('out:', classes[output.arraySync([0])]);
+                prob < 0.01 ? console.log("indefinido") : console.log('out:', classes[output.arraySync([0])]);
 
                 console.log("probabilidade: ", prob);
                 console.log('\n');
-                
+
+                //Save Sketch Data
+                const [sketchData, created] = await SketchInfo.findOrCreate({
+                    where:{ id: Number(output.arraySync([0])) },
+                    defaults:{
+                        label: classes[output.arraySync([0])],
+                        createdAt: new Date(),
+                        updatedAt: new Date(),
+    
+                    }
+                });
+
+                //Save Output Data
+                await UserOutput.create({
+                    sketch_id: Number(output.arraySync([0])),
+                    probability: prob,
+                    user_id: user_id,
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                })
+
                 //memory management
                 tf.dispose(tensor);
                 tf.dispose(output);
