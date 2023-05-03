@@ -1,6 +1,6 @@
-<h1 align="center">drawJS📖</h1>
+<h1 align="center">drawJS✏️</h1>
 
-<p align="center">📝 Projeto desenvolvido em Javascript (Node.js) e Python (Pandas, Tensorflow, Numpy e Opencv), composto por uma rede-neural convolucional treinada segundo aprendizado supervisionado, embarcada em um servidor, que é capaz de receber entradas do usuário, servir ao modelo matemático e devolver a resposta ao usuário. </p>
+<p align="center">✒️Projeto desenvolvido em Javascript (Node.js) e Python (Pandas, Tensorflow, Numpy e Opencv), composto por uma rede-neural convolucional treinada segundo aprendizado supervisionado, embarcada em um servidor, que é capaz de receber entradas do usuário, servir ao modelo matemático e devolver a resposta ao usuário. </p>
 
 <hr>
   
