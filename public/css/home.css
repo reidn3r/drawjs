@@ -22,8 +22,6 @@ body{
     height: 100%;
     background-repeat:no-repeat;
     background-attachment: fixed;
-    /* background-image: linear-gradient(0deg, #00008B, #4B0082); */
-    /* background-image: linear-gradient(135deg, #080808, #0f0f0f); */
     background-image: linear-gradient(135deg, #080808, #404040);
 }
 
@@ -75,6 +73,7 @@ body{
 
 #main-description{
     display: flex;
+    flex-direction: column;
     height: 500px;
     width: 500px;
     border: 1px solid #fff;
@@ -86,14 +85,16 @@ body{
     box-shadow: 10px 10px 20px #101010;
 }
 
-#drawJS{
-    font-size: 30px;
-    font-family: 'Times New Roman', Times, serif;
-}
-
-#main-description-text{
+#main-description-text, .desc-title{
     color: #F5F5F5;
     font-family: 'Roboto', sans-serif;
+    text-align: justify;
+}
+
+.desc-title{
+    margin: 2vh;
+    font-size: 30px;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 #button{

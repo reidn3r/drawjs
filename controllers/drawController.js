@@ -3,9 +3,9 @@ const path = require('path');
 const fs = require('fs');
 const Jimp = require('jimp');
 const tf = require('@tensorflow/tfjs-node');
-const { tfmodePreprocess, RGB2GRAYSCALE } = require('../../public/src/preprocessInput');
+const { tfmodePreprocess, RGB2GRAYSCALE } = require('../public/src/preprocessInput');
 
-const { SketchInfo, UserOutput } = require('../../models');
+const { SketchInfo, UserOutput } = require('../models');
 const jwt = require('jsonwebtoken');
 
 //env variable:

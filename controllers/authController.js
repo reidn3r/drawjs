@@ -1,6 +1,6 @@
 require('dotenv').config();
 const bcrypt = require('bcrypt');
-const { UsersInfo } = require('../../models');
+const { UsersInfo } = require('../models');
 const jwt = require('jsonwebtoken');
 
 const loginPOST = async(req, res) => {
@@ -18,7 +18,6 @@ const loginPOST = async(req, res) => {
     if(!match) return res.status(401).json({message: "wrong password"});
 
     const token = jwt.sign({user_id: foundUser.id}, process.env.SECRET, { expiresIn: 60*60 });
-    console.log(token);
     
     res.cookie('jwt', token, {httpOnly: true, secure:false});
 

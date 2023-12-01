@@ -5,15 +5,14 @@ const router = express.Router();
 const verifyJWT = require('../middleware/jwtMiddleware');
 
 //GET Method Routes
-router.get('/',require('../controllers/GET/homeController'));
-router.get('/draw', verifyJWT, require('../controllers/GET/drawController'));
-router.get('/about', require('../controllers/GET/aboutController'));
-router.get('/login', require('../controllers/GET/loginController'));
-router.get('/register', require('../controllers/GET/registerController'));
+router.get('/',require('../controllers/homeController'));
+router.get('/draw', verifyJWT, require('../controllers/drawController'));
+router.get('/login', require('../controllers/loginPageController'));
+router.get('/register', require('../controllers/registerController'));
 
 //POST Method Routes
-router.post('/login', require('../controllers/POST/loginPostController'));
-router.post('/register', require('../controllers/POST/registerPostController'));
+router.post('/login', require('../controllers/authController'));
+router.post('/register', require('../controllers/registerPostController'));
 
 //Default
 router.get('/*', (req, res) => {
