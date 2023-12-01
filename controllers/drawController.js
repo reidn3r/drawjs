@@ -23,7 +23,7 @@ const drawPage = async(req, res) => {
     const { user_id } = payload;
     
     //LabelEncoder classes
-    const labelEncoderClasses = fs.readFileSync(path.join(__dirname, '..', '..', 'LabelEncoder', process.env.CLASSES_PTBR));
+    const labelEncoderClasses = fs.readFileSync(path.join(__dirname, '..', 'LabelEncoder', process.env.CLASSES_PTBR));
     const classes = JSON.parse(labelEncoderClasses);
     
     //socketio
@@ -79,10 +79,9 @@ const drawPage = async(req, res) => {
 
                 //output data
                 socket.emit('output-data', {output: [prob, classes[output.arraySync([0])]]});
-                // socket.emit('output', {data: "abc"});
                 
                 //Save Sketch Data
-                const [sketchData, created] = await SketchInfo.findOrCreate({
+                await SketchInfo.findOrCreate({
                     where:{ id: Number(output.arraySync([0])) },
                     defaults:{
                         label: classes[output.arraySync([0])],

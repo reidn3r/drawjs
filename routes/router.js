@@ -3,12 +3,15 @@ const router = express.Router();
 
 //jwt auth
 const verifyJWT = require('../middleware/jwtMiddleware');
+const deleteToken = require('../middleware/deleteToken');
+const checkLogin = require('../middleware/checkAuth');
 
 //GET Method Routes
-router.get('/',require('../controllers/homeController'));
+router.get('/', deleteToken, require('../controllers/homeController'));
 router.get('/draw', verifyJWT, require('../controllers/drawController'));
-router.get('/login', require('../controllers/loginPageController'));
-router.get('/register', require('../controllers/registerController'));
+router.get('/login', checkLogin, require('../controllers/loginPageController'));
+router.get('/register', checkLogin, require('../controllers/registerController'));
+router.get('/recruiter', require('../controllers/recruiterAuthController'));
 
 //POST Method Routes
 router.post('/login', require('../controllers/authController'));

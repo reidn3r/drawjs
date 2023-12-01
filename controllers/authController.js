@@ -21,7 +21,7 @@ const loginPOST = async(req, res) => {
     
     res.cookie('jwt', token, {httpOnly: true, secure:false});
 
-    return res.redirect('/draw');
+    return res.status(200).redirect('/draw');
 }
 
 module.exports = loginPOST;

@@ -85,10 +85,14 @@ body{
     box-shadow: 10px 10px 20px #101010;
 }
 
-#main-description-text, .desc-title{
+#main-description-text, .desc-title, .tip-text-title, .tip-text{
     color: #F5F5F5;
     font-family: 'Roboto', sans-serif;
     text-align: justify;
+}
+
+.tip-text-title{
+    margin-top: 3vh;
 }
 
 .desc-title{
