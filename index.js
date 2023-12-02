@@ -5,6 +5,7 @@ const favicon = require('serve-favicon');
 const cookieParser = require('cookie-parser');
 const express = require('express');
 const app = express();
+const sqldb = require('./config/dbConnect');
 
 //cookie-parser
 app.use(cookieParser());
@@ -36,12 +37,14 @@ app.use(favicon(path.join(__dirname, 'public', 'icon', 'pen.png')));
 //routes
 app.use('/', require('./routes/router'));
 
-const db = require('./models/index');
-db.sequelize.authenticate()
-.then(() => {
-    server.listen(PORT, () => console.log(`running at: http://localhost:${PORT}`));
-    console.log("\nMySQL connection running at: PORT 33061");
-    })
-    .catch((err) => {
+const runServer = async() => {
+    try{
+        await sqldb();
+        server.listen(PORT, () => console.log(`running at: http://localhost:${PORT}\n`));
+        console.log("MySQL: PORT 33061");
+    }
+    catch(err){
         console.log(err);
-    })
+    }
+}
+runServer();

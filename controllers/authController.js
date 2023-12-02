@@ -1,6 +1,7 @@
 require('dotenv').config();
 const bcrypt = require('bcrypt');
-const { UsersInfo } = require('../models');
+
+const UsersInfo = require('../models/usersinfo');
 const jwt = require('jsonwebtoken');
 
 const loginPOST = async(req, res) => {
