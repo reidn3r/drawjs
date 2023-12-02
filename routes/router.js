@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 //jwt auth
-const verifyJWT = require('../middleware/jwtMiddleware');
+const verifyJWT = require('../middleware/drawPage');
 const deleteToken = require('../middleware/deleteToken');
 const checkLogin = require('../middleware/checkAuth');
 
