@@ -53,7 +53,7 @@ const UserOutput = sequelize.define("user_output", {
     allowNull: false,
   },
 
-  sketch_id: {
+  probability: {
     type: DataTypes.REAL,
     allowNull: false,
   },

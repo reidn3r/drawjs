@@ -6,7 +6,7 @@ const tf = require('@tensorflow/tfjs-node');
 const { tfmodePreprocess, RGB2GRAYSCALE } = require('../public/src/preprocessInput');
 
 const SketchInfo = require('../models/sketchinfo');
-const UserOutput = require('../models/sketchinfo');
+const UserOutput = require('../models/useroutput');
 const jwt = require('jsonwebtoken');
 
 //env variable:
@@ -14,10 +14,6 @@ const size = process.env.IMGSIZE;
 const convKernel = [[0,1,0],[1,1,1],[0,1,0]];
 
 const drawPage = async(req, res) => {
-    //global variables
-    let prob_output;
-    let label_output
-
     //payload
     const cookies = req.cookies.jwt;
     const payload = jwt.verify(cookies, process.env.SECRET);
@@ -38,8 +34,6 @@ const drawPage = async(req, res) => {
         if(connections[0] === socket.id){
             io.removeAllListeners('connection');
         }
-        console.log(`id ${socket.id} connected`);
-        
         //tensorflow model
         const model = await tf.loadLayersModel(process.env.MODEL_PATH);
 
@@ -75,9 +69,6 @@ const drawPage = async(req, res) => {
                 
                 prob < 0.01 ? console.log("indefinido") : console.log('out:', classes[output.arraySync([0])]);
 
-                console.log("probabilidade: ", prob);
-                console.log('\n');
-
                 //output data
                 socket.emit('output-data', {output: [prob, classes[output.arraySync([0])]]});
                 
@@ -86,16 +77,16 @@ const drawPage = async(req, res) => {
                     where:{ id: Number(output.arraySync([0])) },
                     defaults:{
                         label: classes[output.arraySync([0])],
-                        createdAt: new Date(),
-                        updatedAt: new Date(),
+                        // createdAt: new Date(),
+                        // updatedAt: new Date(),
                     }
                 });
 
                 //Save Output Data
                 await UserOutput.create({
+                    user_id: user_id,
                     sketch_id: Number(output.arraySync([0])),
                     probability: prob,
-                    user_id: user_id,
                     createdAt: new Date(),
                     updatedAt: new Date(),
                 })
