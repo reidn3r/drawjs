@@ -1,6 +1,5 @@
+const findOrCreateUser = require('../services/findOrCreateUserService');
 const bcrypt = require('bcrypt');
-
-const UsersInfo = require('../models/usersinfo');
 
 const registerPost = async(req, res) => {
     const { username, confirm_password, password } = req.body;
@@ -11,20 +10,12 @@ const registerPost = async(req, res) => {
     if(password !== confirm_password) return res.status(401).json({message: "password and confirm_password does'nt match"});
 
     const hashpw = await bcrypt.hash(password, 10);
+    const { userInfo, created } =  await findOrCreateUser(username, hashpw);
+    
     //username is already registered
-    const [userInfo, created] = await UsersInfo.findOrCreate({ 
-        where: { username: username},
-        defaults:{
-            password: hashpw,
-            lastTimeVisited: new Date(),
-            createdAt: new Date(),
-            updatedAt: new Date(),
-        }
-    });
-
     if(!created) return res.status(401).json({message: "Username is already registered"});
 
-    res.redirect('/login');
+    res.status(200).redirect('/login');
 }
 
 module.exports = registerPost;

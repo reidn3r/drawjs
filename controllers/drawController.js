@@ -1,13 +1,14 @@
 require('dotenv').config();
 const path = require('path');
+const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const Jimp = require('jimp');
 const tf = require('@tensorflow/tfjs-node');
-const { tfmodePreprocess, RGB2GRAYSCALE } = require('../public/src/preprocessInput');
 
-const SketchInfo = require('../models/sketchinfo');
-const UserOutput = require('../models/useroutput');
-const jwt = require('jsonwebtoken');
+//services
+const scanImageService = require('../services/scanImageService');
+const findOrCreateSketch = require('../services/findOrCreateSketchService');
+const createUserOutput = require('../services/createUserOutputService');
 
 //env variable:
 const size = process.env.IMGSIZE;
@@ -43,23 +44,12 @@ const drawPage = async(req, res) => {
             Jimp.read(buffer, async(err, img) => {
                 if(err) console.log(err);
                 img.resize(Number(size), Number(size))
-                .invert()
-                    //Black pixels -> white pixels and vice-versa
-
-                .convolute(convKernel)
-                    //Dilation
+                .invert() //Black pixels -> white pixels and vice-versa
+                .convolute(convKernel) //Dilation
 
                 // .write('drawjs.png')
                 .scan(0, 0, img.bitmap.width, img.bitmap.height, (x, y, i) => {
-                    let r = img.bitmap.data[i];
-                    let g = img.bitmap.data[i + 1];
-                    let b = img.bitmap.data[i + 2];
-
-                    //rgb (3 channels img) -> grayscale (single channel img)
-                    let px = RGB2GRAYSCALE(r, g, b);
-
-                    //preprocess input - mode: "tf"
-                    px = tfmodePreprocess(px);
+                    const px = scanImageService(img, i);
                     pixels.push(px);
                 })
                 
@@ -73,23 +63,12 @@ const drawPage = async(req, res) => {
                 socket.emit('output-data', {output: [prob, classes[output.arraySync([0])]]});
                 
                 //Save Sketch Data
-                await SketchInfo.findOrCreate({
-                    where:{ id: Number(output.arraySync([0])) },
-                    defaults:{
-                        label: classes[output.arraySync([0])],
-                        // createdAt: new Date(),
-                        // updatedAt: new Date(),
-                    }
-                });
+                let sketch_id = Number(output.arraySync([0]));
+                let sketch_label = classes[output.arraySync([0])];
+                findOrCreateSketch(sketch_id, sketch_label);
 
                 //Save Output Data
-                await UserOutput.create({
-                    user_id: user_id,
-                    sketch_id: Number(output.arraySync([0])),
-                    probability: prob,
-                    createdAt: new Date(),
-                    updatedAt: new Date(),
-                })
+                createUserOutput(user_id, sketch_id, prob);
 
                 //memory management
                 tf.dispose(tensor);

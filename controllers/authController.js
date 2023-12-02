@@ -1,8 +1,8 @@
 require('dotenv').config();
 const bcrypt = require('bcrypt');
 
-const UsersInfo = require('../models/usersinfo');
 const jwt = require('jsonwebtoken');
+const findUserByUsername = require('../services/findUserByUsernameService');
 
 const loginPOST = async(req, res) => {
     const { username, password } = req.body;
@@ -11,7 +11,7 @@ const loginPOST = async(req, res) => {
     if(!username || !password) return res.status(401).json({message: "username and password are required"});
 
     //check if user exists
-    const foundUser = await UsersInfo.findOne({ where: {username: username}});
+    const foundUser = await findUserByUsername(username);
     if(!foundUser) return res.status(401).json({message: "username not registered"});
     
     //check if password is correct
